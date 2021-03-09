@@ -88,7 +88,7 @@ public class ProductController {
     public ModelAndView searchProductByName(@RequestParam String name) {
         name = "%" + name + "%";
         List<Product> products = productService.findByName(name);
-        if (products.size() == 0) return new ModelAndView("list");
+        if (products.size() == 0) return new ModelAndView("error-404");
         else return new ModelAndView("list", "products", products);
     }
 }
