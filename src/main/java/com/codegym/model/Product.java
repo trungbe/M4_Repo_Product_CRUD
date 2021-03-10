@@ -1,6 +1,8 @@
 package com.codegym.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Product {
@@ -8,8 +10,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min = 2, max = 30, message = "Please fill out from 2 to 30 characters ! ")
     private String name;
-
+    @Min(value = 5, message = "Please fill out minimum 5$")
     private double price;
 
     @ManyToOne
