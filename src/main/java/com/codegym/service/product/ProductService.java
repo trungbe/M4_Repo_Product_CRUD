@@ -22,7 +22,7 @@ public class ProductService implements IProductService {
 
     @Override
     public Page<Product> findALl(Pageable pageable) {
-        return productRepository.findAll(pageable);
+        return productRepository.findAllByOrderByIdAsc(pageable);
     }
 
     @Override
@@ -49,4 +49,5 @@ public class ProductService implements IProductService {
     public List<Product> findByCategoryName(Long id) {
         return productRepository.findProductByCategoryName(id);
     }
+
 }

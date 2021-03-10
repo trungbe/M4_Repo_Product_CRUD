@@ -65,8 +65,8 @@ public class ProductController {
             ModelAndView modelAndView = new ModelAndView("create");
             return modelAndView;
         }
-        long id = productService.findALl().size();
-        product.setId(id);
+//        long id = productService.findALl().size();
+//        product.setId(id);
         productService.save(product);
         ModelAndView modelAndView = new ModelAndView("create", "product", new Product());
         modelAndView.addObject("mess", "Tao moi thanh cong product ten la " + product.getName());
@@ -113,6 +113,5 @@ public class ProductController {
         List<Product> products = productService.findByCategoryName(id);
         if (products.size() == 0) return new ModelAndView("error-404");
         else return new ModelAndView("list", "products", products);
-
     }
 }
