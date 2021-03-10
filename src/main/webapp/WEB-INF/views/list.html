@@ -6,10 +6,19 @@
     <head th:replace="/layout :: head">
     </head>
 <body>
-<form action="/products" method="post">
-    Search by first name:
-    <input name="name" type="text" placeholder="Input name search"/>
-    <input type="submit" value="Search"/>
+<!--<form action="/products" method="post">-->
+<!--    Search by first name:-->
+<!--    <input name="name" type="text" placeholder="Input name search"/>-->
+<!--    <input type="submit" value="Search"/>-->
+<!--</form>-->
+<form action="/products" th:method="post">
+    <select th:name="id" >
+        <th:block th:each="c:${categories}">
+            <option th:value="${c.id}" th:text="${c.name}"></option>
+        </th:block>
+    </select>
+    <input type="submit" value="Search">
+
 </form>
 <h4><a href="/products/create">Add new product</a></h4>
 
@@ -18,14 +27,13 @@
 
         <th>Name</th>
         <th>Price</th>
-<!--        <th>Category</th>-->
+        <th>Category</th>
         <th colspan="3">Action</th>
     </tr>
     <tr th:each="p: ${products}">
         <td th:text="${p.name}"></td>
         <td th:text="${p.price}"></td>
-<!--        <td th:text="${p.category.name}"></td>-->
-
+        <td th:text="${p.category.name}"></td>
         <td><a th:href="@{/products/edit/{id}(id=${p.id})}">Edit</a></td>
         <td><a th:href="@{/products/delete/{id}(id=${p.id})}"
                onclick="return confirm('Do you want delete ?');">Delete</a></td>

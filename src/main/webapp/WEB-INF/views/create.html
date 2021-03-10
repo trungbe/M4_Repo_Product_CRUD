@@ -21,9 +21,11 @@
     </div>
     <div>
         <label>Category</label>
-<!--        <select th:each="p: ${category}">-->
-<!--            <option th:value="${p.id}" th:text="${p.name}"></option>-->
-<!--        </select>-->
+        <select th:field="*{category}">
+            <th:block th:each="p: ${categories}">
+                <option th:value="${p.id}" th:text="${p.name}"></option>
+            </th:block>
+        </select>
     </div>
     <button type="submit">Create</button>
 </form>

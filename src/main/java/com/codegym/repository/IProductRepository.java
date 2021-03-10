@@ -10,11 +10,15 @@ import java.util.List;
 
 @Repository
 public interface IProductRepository extends PagingAndSortingRepository<Product, Long> {
-    //Tìm kiếm sản phẩm theo category
+    //Show category
     List<Product> findAllByCategory(Category category);
 
 
     //Tìm kiếm sản phẩm theo tên
     @Query(value = "select  * from product where product.name like ?", nativeQuery = true)
     List<Product> findProductName(String name);
+
+    @Query(value = "select * from product where product.category_id = ?", nativeQuery = true)
+    List<Product> findProductByCategoryName(Long id);
+
 }

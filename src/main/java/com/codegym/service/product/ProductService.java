@@ -1,5 +1,6 @@
 package com.codegym.service.product;
 
+import com.codegym.model.Category;
 import com.codegym.model.Product;
 import com.codegym.repository.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,10 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> findByName(String name) {
         return productRepository.findProductName(name);
+    }
+
+    @Override
+    public List<Product> findByCategoryName(Long id) {
+        return productRepository.findProductByCategoryName(id);
     }
 }

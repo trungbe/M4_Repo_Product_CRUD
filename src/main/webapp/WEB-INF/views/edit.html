@@ -16,10 +16,14 @@
         <label>Price</label>
         <input type="text" th:field="*{price}"/>
     </div>
-<!--    <div>-->
-<!--        <label>Category</label>-->
-<!--        <input readonly type="text" th:field="*{category.name}"/>-->
-<!--    </div>-->
+    <div>
+        <label>Category</label>
+        <select th:field="*{category}">
+            <th:block th:each="p: ${categories}">
+                <option th:value="${p.id}" th:text="${p.name}"></option>
+            </th:block>
+        </select>
+    </div>
     <button type="submit">Edit</button>
 </form>
 <footer th:replace="/layout :: footer"></footer>

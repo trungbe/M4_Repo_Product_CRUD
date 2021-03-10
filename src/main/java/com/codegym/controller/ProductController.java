@@ -1,6 +1,8 @@
 package com.codegym.controller;
 
+import com.codegym.model.Category;
 import com.codegym.model.Product;
+import com.codegym.service.category.ICategoryService;
 import com.codegym.service.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,12 +20,20 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private IProductService productService;
+    @Autowired
+    private ICategoryService categoryService;
+
+    @ModelAttribute("categories")
+    public List<Category> categories() {
+        return categoryService.findALl();
+    }
 
     @GetMapping("")
     public ModelAndView getAll(@PageableDefault(size = 5) Pageable pageable) {
         Page<Product> products = productService.findALl(pageable);
         ModelAndView modelAndView = new ModelAndView("list");
         modelAndView.addObject("products", products);
+//        modelAndView.addObject("categories", categoryService.findAll());
         return modelAndView;
     }
 
@@ -84,11 +94,19 @@ public class ProductController {
         return new ModelAndView("view", "product", productService.findById(id));
     }
 
+//    @PostMapping("")
+//    public ModelAndView searchProductByName(@RequestParam String name) {
+//        name = "%" + name + "%";
+//        List<Product> products = productService.findByName(name);
+//        if (products.size() == 0) return new ModelAndView("error-404");
+//        else return new ModelAndView("list", "products", products);
+//    }
+
     @PostMapping("")
-    public ModelAndView searchProductByName(@RequestParam String name) {
-        name = "%" + name + "%";
-        List<Product> products = productService.findByName(name);
+    public ModelAndView searchProductByCategory(@RequestParam Long id) {
+        List<Product> products = productService.findByCategoryName(id);
         if (products.size() == 0) return new ModelAndView("error-404");
         else return new ModelAndView("list", "products", products);
+
     }
 }
