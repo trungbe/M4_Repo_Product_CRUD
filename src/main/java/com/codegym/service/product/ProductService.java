@@ -1,6 +1,6 @@
 package com.codegym.service.product;
 
-import com.codegym.model.Category;
+import com.codegym.exception.NotFoundException;
 import com.codegym.model.Product;
 import com.codegym.repository.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> findALl() {
-        return (List<Product>) productRepository.findAll();
+        return productRepository.findAll();
     }
 
     @Override
@@ -26,8 +26,11 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Product findById(Long id) {
-        return productRepository.findOne(id);
+    public Product findById(Long id) throws NotFoundException {
+        Product product = productRepository.findOne(id);
+        if (product != null) {
+            return product;
+        } else throw new NotFoundException();
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.codegym.service.product;
 
-import com.codegym.model.Category;
 import com.codegym.model.Product;
 import com.codegym.service.IService;
 

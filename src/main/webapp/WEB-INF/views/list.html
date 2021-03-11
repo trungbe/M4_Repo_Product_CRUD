@@ -6,12 +6,12 @@
     <head th:replace="/layout :: head">
     </head>
 <body>
-<!--<form action="/products" method="post">-->
-<!--    Search by first name:-->
-<!--    <input name="name" type="text" placeholder="Input name search"/>-->
-<!--    <input type="submit" value="Search"/>-->
-<!--</form>-->
-<form action="/products" th:method="post">
+<form action="/products/searchName" method="post">
+    Search by first name:
+    <input name="name" type="text" placeholder="Input name search"/>
+    <input type="submit" value="Search"/>
+</form>
+<form action="/products/searchCategory" th:method="post">
     <select th:name="id" >
         <th:block th:each="c:${categories}">
             <option th:value="${c.id}" th:text="${c.name}"></option>

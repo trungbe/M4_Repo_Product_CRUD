@@ -1,6 +1,6 @@
 package com.codegym.service;
 
-import com.codegym.model.Product;
+import com.codegym.exception.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -11,7 +11,7 @@ public interface IService<T> {
 
     Page<T> findALl(Pageable pageable);
 
-    T findById(Long id);
+    T findById(Long id) throws NotFoundException;
 
     T save(T t);
 

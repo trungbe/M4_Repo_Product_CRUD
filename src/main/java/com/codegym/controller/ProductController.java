@@ -1,5 +1,6 @@
 package com.codegym.controller;
 
+import com.codegym.exception.NotFoundException;
 import com.codegym.model.Category;
 import com.codegym.model.Product;
 import com.codegym.service.category.ICategoryService;
@@ -28,6 +29,11 @@ public class ProductController {
     @ModelAttribute("categories")
     public List<Category> categories() {
         return categoryService.findALl();
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView showNotFound() {
+        return new ModelAndView("error-404");
     }
 
     @GetMapping("")
@@ -74,7 +80,7 @@ public class ProductController {
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView showEdit(@PathVariable Long id) {
+    public ModelAndView showEdit(@PathVariable Long id) throws NotFoundException {
         Product products = productService.findById(id);
         ModelAndView modelAndView = new ModelAndView("edit");
         modelAndView.addObject("product", products);
@@ -96,22 +102,20 @@ public class ProductController {
     }
 
     @GetMapping("/view/{id}")
-    public ModelAndView viewDetail(@PathVariable long id) {
+    public ModelAndView viewDetail(@PathVariable long id) throws NotFoundException {
         return new ModelAndView("view", "product", productService.findById(id));
     }
 
-//    @PostMapping("")
-//    public ModelAndView searchProductByName(@RequestParam String name) {
-//        name = "%" + name + "%";
-//        List<Product> products = productService.findByName(name);
-//        if (products.size() == 0) return new ModelAndView("error-404");
-//        else return new ModelAndView("list", "products", products);
-//    }
+    @PostMapping("/searchName")
+    public ModelAndView searchProductByName(@RequestParam String name) {
+        name = "%" + name + "%";
+        List<Product> products = productService.findByName(name);
+        return new ModelAndView("list", "products", products);
+    }
 
-    @PostMapping("")
+    @PostMapping("/searchCategory")
     public ModelAndView searchProductByCategory(@RequestParam Long id) {
         List<Product> products = productService.findByCategoryName(id);
-        if (products.size() == 0) return new ModelAndView("error-404");
-        else return new ModelAndView("list", "products", products);
+        return new ModelAndView("list", "products", products);
     }
 }

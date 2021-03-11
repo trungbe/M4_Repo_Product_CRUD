@@ -1,6 +1,7 @@
 package com.codegym.formatter;
 
 
+import com.codegym.exception.NotFoundException;
 import com.codegym.model.Category;
 import com.codegym.service.category.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,12 @@ public class CategoryFormatter implements Formatter<Category> {
 
     @Override
     public Category parse(String text, Locale locale) {
-        Category category;
-        category = categoryService.findById(Long.parseLong(text));
+        Category category = new Category();
+        try {
+            category = categoryService.findById(Long.parseLong(text));
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
         return category;
     }
 

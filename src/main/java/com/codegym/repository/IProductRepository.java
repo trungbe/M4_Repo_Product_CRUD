@@ -21,6 +21,7 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "select  * from product where product.name like ?", nativeQuery = true)
     List<Product> findProductName(String name);
 
+    //Tìm kiếm sản phẩm theo category
     @Query(value = "select * from product where product.category_id = ?", nativeQuery = true)
     List<Product> findProductByCategoryName(Long id);
 
