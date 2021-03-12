@@ -63,4 +63,9 @@ public class ProductService implements IProductService {
         return productRepository.findTop5ByOrderByDatetimeDesc();
     }
 
+    @Override
+    public long sumPrice() {
+        return productRepository.sumPrice();
+    }
+
 }

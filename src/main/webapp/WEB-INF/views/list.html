@@ -20,13 +20,20 @@
     <input type="submit" value="Search">
 
 </form>
-<h4><a href="/products/create">Add new product</a></h4>
+
+<form action="/products/create">
+    <input type="submit" value="Add new product">
+</form>
 <form action="/products/top5pricemax">
     <input type="submit" value="Top 5 Price Max">
 </form>
 <form action="/products/top5productnewest">
     <input type="submit" value="Top 5 Product Newest">
 </form>
+<form action="/products/sumprice">
+    <input type="submit" value="Sum Price">
+</form>
+<span style="color: red" th:if="${sumprice}" th:text="${sumprice}+'$'"></span>
 <table id="customers">
     <tr>
         <th>Name</th>

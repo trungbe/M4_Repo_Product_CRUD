@@ -39,5 +39,8 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "select * from product order by price desc limit ?", nativeQuery = true)
     List<Product> findTop5ByOrderByPriceDesc(int num);
 
+    // Tinh tổng tiền
+    @Query(value = "select sum(price*quantity) from Product ")
+    long sumPrice();
 
 }

@@ -116,4 +116,11 @@ public class ProductController {
         modelAndView.addObject("products", productService.top5ProductNewest());
         return modelAndView;
     }
+
+    @GetMapping("/sumprice")
+    public ModelAndView sumPrice() {
+        ModelAndView modelAndView = new ModelAndView("list");
+        modelAndView.addObject("sumprice", productService.sumPrice());
+        return modelAndView;
+    }
 }
