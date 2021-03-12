@@ -121,6 +121,7 @@ public class ProductController {
     public ModelAndView sumPrice() {
         ModelAndView modelAndView = new ModelAndView("list");
         modelAndView.addObject("sumprice", productService.sumPrice());
+        modelAndView.addObject("products", productService.findALl());
         return modelAndView;
     }
 }
