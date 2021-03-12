@@ -53,4 +53,14 @@ public class ProductService implements IProductService {
         return productRepository.findProductByCategoryName(id);
     }
 
+    @Override
+    public List<Product> top5ProductPriceMax() {
+        return productRepository.findTop5ByOrderByPriceDesc(5);
+    }
+
+    @Override
+    public List<Product> top5ProductNewest() {
+        return productRepository.findTop5ByOrderByDatetimeDesc();
+    }
+
 }

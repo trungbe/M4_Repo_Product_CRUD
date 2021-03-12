@@ -12,7 +12,7 @@
     <input type="submit" value="Search"/>
 </form>
 <form action="/products/searchCategory" th:method="post">
-    <select th:name="id" >
+    <select th:name="id">
         <th:block th:each="c:${categories}">
             <option th:value="${c.id}" th:text="${c.name}"></option>
         </th:block>
@@ -21,19 +21,29 @@
 
 </form>
 <h4><a href="/products/create">Add new product</a></h4>
-
+<form action="/products/top5pricemax">
+    <input type="submit" value="Top 5 Price Max">
+</form>
+<form action="/products/top5productnewest">
+    <input type="submit" value="Top 5 Product Newest">
+</form>
 <table id="customers">
     <tr>
-
         <th>Name</th>
         <th>Price</th>
         <th>Category</th>
+        <th>Description</th>
+        <th>Datetime</th>
+        <th>Quantity</th>
         <th colspan="3">Action</th>
     </tr>
     <tr th:each="p: ${products}">
         <td th:text="${p.name}"></td>
         <td th:text="${p.price}"></td>
         <td th:text="${p.category.name}"></td>
+        <td th:text="${p.description}"></td>
+        <td th:text="${p.datetime}"></td>
+        <td th:text="${p.quantity}"></td>
         <td><a th:href="@{/products/edit/{id}(id=${p.id})}">Edit</a></td>
         <td><a th:href="@{/products/delete/{id}(id=${p.id})}"
                onclick="return confirm('Do you want delete ?');">Delete</a></td>

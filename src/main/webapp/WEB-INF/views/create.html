@@ -21,7 +21,6 @@
         <label>Price</label>
         <input type="text" th:field="*{price}"/>
         <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Name Error</td>
-
     </div>
     <div>
         <label>Category</label>
@@ -30,6 +29,20 @@
                 <option th:value="${p.id}" th:text="${p.name}"></option>
             </th:block>
         </select>
+    </div>
+    <div>
+        <label>Description</label>
+        <input type="text" th:field="*{description}"/>
+        <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Name Error</td>
+    </div>
+    <div>
+        <label>Datetime</label>
+        <input type="datetime-local" th:field="*{datetime}"/>
+    </div>
+    <div>
+        <label>Quantity</label>
+        <input type="text" th:field="*{quantity}"/>
+        <td th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Name Error</td>
     </div>
     <button type="submit">Create</button>
 </form>

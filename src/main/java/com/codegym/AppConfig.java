@@ -2,6 +2,7 @@ package com.codegym;
 
 import com.codegym.aspect.MyLogger;
 import com.codegym.formatter.CategoryFormatter;
+import com.codegym.formatter.LocalDateFormatter;
 import com.codegym.service.category.ICategoryService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -98,7 +99,7 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/product_manage_repo");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/product_manager_120321");
         dataSource.setUsername("root");
         dataSource.setPassword("");
         return dataSource;
@@ -134,4 +135,9 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         return new MyLogger();
     }
 
+//    @Override
+//    public void addFormatters(FormatterRegistry registry) {
+//            LocalDateFormatter localDateFormatter = new LocalDateFormatter("MM-dd-yyyy");
+//        registry.addFormatter(localDateFormatter);
+//    }
 }

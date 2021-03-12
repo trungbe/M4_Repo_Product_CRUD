@@ -9,14 +9,15 @@ import org.aspectj.lang.annotation.Aspect;
 public class MyLogger {
     @AfterReturning(pointcut = "within(com.codegym.controller.*)", returning = "result")
     public void log(JoinPoint joinPoint, Object result) {
-        System.out.println("Start");
+        System.out.println("Start log");
         String className = joinPoint.getTarget().getClass().getSimpleName();
         String methodName = joinPoint.getSignature().getName();
         System.out.println(className + "-" + methodName);
         if (result == null) {
             System.out.println("null");
         } else {
-            System.out.println(result.toString());
+            System.out.println(result.hashCode());
         }
+        System.out.println("End log");
     }
 }

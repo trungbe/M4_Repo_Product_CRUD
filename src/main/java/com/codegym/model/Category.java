@@ -1,7 +1,9 @@
 package com.codegym.model;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Category {
@@ -10,9 +12,6 @@ public class Category {
     private Long id;
 
     private String name;
-
-    @OneToMany
-    private List<Product> products;
 
     public Category() {
     }
@@ -33,11 +32,4 @@ public class Category {
         this.name = name;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
 }

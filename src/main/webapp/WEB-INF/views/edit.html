@@ -24,6 +24,18 @@
             </th:block>
         </select>
     </div>
+    <div>
+        <label>Description</label>
+        <input type="text" th:field="*{description}"/>
+    </div>
+    <div>
+        <label>Datetime</label>
+        <input type="text" th:field="*{datetime}"/>
+    </div>
+    <div>
+        <label>Quantity</label>
+        <input type="number" th:field="*{quantity}"/>
+    </div>
     <button type="submit">Edit</button>
 </form>
 <footer th:replace="/layout :: footer"></footer>

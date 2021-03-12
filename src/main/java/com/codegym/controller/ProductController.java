@@ -45,19 +45,6 @@ public class ProductController {
         return modelAndView;
     }
 
-//    @GetMapping("")
-//    public ModelAndView getAll(@RequestParam("search") Optional<String> name) {
-//        List<Product> products;
-//        if (name.isPresent()) {
-//            products = productService.findByName(name.get());
-//        } else {
-//            products = productService.findALl();
-//        }
-//        ModelAndView modelAndView = new ModelAndView("list");
-//        modelAndView.addObject("products", products);
-//        return modelAndView;
-//    }
-
     @GetMapping("/create")
     public ModelAndView showCreate() {
         ModelAndView modelAndView = new ModelAndView("create");
@@ -71,8 +58,6 @@ public class ProductController {
             ModelAndView modelAndView = new ModelAndView("create");
             return modelAndView;
         }
-//        long id = productService.findALl().size();
-//        product.setId(id);
         productService.save(product);
         ModelAndView modelAndView = new ModelAndView("create", "product", new Product());
         modelAndView.addObject("mess", "Tao moi thanh cong product ten la " + product.getName());
@@ -117,5 +102,18 @@ public class ProductController {
     public ModelAndView searchProductByCategory(@RequestParam Long id) {
         List<Product> products = productService.findByCategoryName(id);
         return new ModelAndView("list", "products", products);
+    }
+
+    @GetMapping("/top5pricemax")
+    public ModelAndView find5PriceMax() {
+        ModelAndView modelAndView = new ModelAndView("list");
+        modelAndView.addObject("products", productService.top5ProductPriceMax());
+        return modelAndView;
+    }
+    @GetMapping("/top5productnewest")
+    public ModelAndView find5ProductNew() {
+        ModelAndView modelAndView = new ModelAndView("list");
+        modelAndView.addObject("products", productService.top5ProductNewest());
+        return modelAndView;
     }
 }
