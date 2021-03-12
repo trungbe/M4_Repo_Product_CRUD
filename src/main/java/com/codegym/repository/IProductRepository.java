@@ -26,12 +26,14 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
     List<Product> findProductByCategoryName(Long id);
 
     //Top5 Product Newest
+
     List<Product> findTop5ByOrderByDatetimeDesc();
 
 //    @Query(value = "select * from product order by date desc limit ?", nativeQuery = true)
 //    List<Product> findTop5ByOrderByDatetimeDesc(int num);
 
     //Top5 price max
+
 //    List<Product> findTop5ByOrderByPriceDesc();
 
     @Query(value = "select * from product order by price desc limit ?", nativeQuery = true)

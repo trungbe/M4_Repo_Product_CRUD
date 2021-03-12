@@ -14,8 +14,24 @@
         <label th:text="${product.name}"></label>
     </div>
     <div class="cusdetail">
-        <label>Origin:</label>
+        <label>Price:</label>
         <label th:text="${product.price}"></label>
+    </div>
+    <div class="cusdetail">
+        <label>Category:</label>
+        <label th:text="${product.category.name}"></label>
+    </div>
+    <div class="cusdetail">
+        <label>Description:</label>
+        <label th:text="${product.description}"></label>
+    </div>
+    <div class="cusdetail">
+        <label>Datetime:</label>
+        <label th:text="${product.datetime}"></label>
+    </div>
+    <div class="cusdetail">
+        <label>Quantity:</label>
+        <label th:text="${product.quantity}"></label>
     </div>
 </div>
 <footer th:replace="/layout :: footer"></footer>
