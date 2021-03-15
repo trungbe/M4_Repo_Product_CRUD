@@ -17,8 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-
-@Controller
+@RestController
+//@Controller
 @RequestMapping("/products")
 public class ProductController {
     @Autowired
