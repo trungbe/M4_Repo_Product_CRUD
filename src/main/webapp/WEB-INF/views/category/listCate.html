@@ -38,9 +38,9 @@
                     success: function (data) {
                         // hien thi danh sach o day
                         let content = '    <tr>\n' +
-                            '        <td>Name</td>\n' +
-                            '        <td>Edit</td>\n' +
-                            '        <td>Delete</td>\n' +
+                            '        <th>Name</th>\n' +
+                            '        <th>Edit</th>\n' +
+                            '        <th>Delete</th>\n' +
                             '    </tr>';
                         for (let i = 0; i < data.length; i++) {
                             content += getCate(data[i]);

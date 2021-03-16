@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -33,6 +34,13 @@ public class RestProductController {
         return new ResponseEntity<>(productService.findALl(), HttpStatus.OK);
     }
 
+    @GetMapping("/list")
+    public ModelAndView getList() {
+        ModelAndView modelAndView = new ModelAndView("listProduct");
+        modelAndView.addObject("list", productService.findALl());
+        return modelAndView;
+    }
+
     //create
     @PostMapping()
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
@@ -40,6 +48,7 @@ public class RestProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    //findId
     @GetMapping("/{id}")
     public ResponseEntity<Product> getOneProduct(@PathVariable Long id) throws NotFoundException {
         Product p;
@@ -48,7 +57,7 @@ public class RestProductController {
     }
 
     //update
-    @PutMapping(value = "/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Product> editProduct(@PathVariable Long id, @RequestBody Product product) {
         product.setId(id);
         productService.save(product);
@@ -56,9 +65,9 @@ public class RestProductController {
     }
 
     //delete
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Product> deleteProduct(@PathVariable Long id, @RequestBody Product product) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable Long id) {
         productService.remove(id);
-        return new ResponseEntity<>(product, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
