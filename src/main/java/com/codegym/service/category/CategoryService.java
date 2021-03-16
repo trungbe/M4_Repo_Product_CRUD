@@ -31,11 +31,12 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public Category save(Category category) {
-        return null;
+        return categoryRepository.save(category);
     }
 
     @Override
     public void remove(Long id) {
+        categoryRepository.delete(id);
     }
 
     @Override

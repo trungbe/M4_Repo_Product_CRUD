@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="/layout :: head"></head>
+
+    <meta charset="UTF-8">
+    <title>List Category</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+            function addCate() {
+                //lay data
+                let cateName = $('#cateName').val();
+                let newCate = {
+                    name: cateName
+                }
+                //call ajax
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type: "POST",
+                    data: JSON.stringify(newCate),
+                    //ten API
+                    url: "/category/",
+                    success: successHandler
+                });
+                //chặn sự kiện mặc định của thẻ
+                event.preventDefault();
+            }
+
+            function successHandler() {
+                $.ajax({
+                    type: "GET",
+                    //tên API
+                    url: "/category/",
+                    //xử lý khi thành công
+                    success: function (data) {
+                        // hien thi danh sach o day
+                        let content = '    <tr>\n' +
+                            '        <td>Name</td>\n' +
+                            '        <td>Edit</td>\n' +
+                            '        <td>Delete</td>\n' +
+                            '    </tr>';
+                        for (let i = 0; i < data.length; i++) {
+                            content += getCate(data[i]);
+                        }
+                        document.getElementById('customers').innerHTML = content;
+                    }
+                });
+            }
+
+            function getCate(cate) {
+                return `<tr><td >${cate.name}</td>` +
+                    `<td><a class="editCate" href="${cate.id}">Edit</a></td>` +
+                    `<td><a class="deleteCate" onclick="deleteCate($(this))" href="${cate.id}">Delete</a></td></tr>`;
+            }
+
+           // $(document).ready(function () {
+                //sư kiện nào thực hiện Ajax
+                // $('.deleteCate').click(function (event) {
+                //     //lay du lieu
+                //     let a = $(this);
+                //     let idCate = a.attr("href");
+                //     // goi ajax
+                //     $.ajax({
+                //         type: "DELETE",
+                //         //tên API
+                //         url: "/category/" + idCate,
+                //         //xử lý khi thành công
+                //         success: function (data) {
+                //             a.parent().parent().remove();
+                //         }
+                //     });
+                //     //chặn sự kiện mặc định của thẻ
+                //     event.preventDefault();
+                // });
+           // })
+            function deleteCate(a) {
+                event.preventDefault();
+                    let idCate = a.attr("href");
+                    // goi ajax
+                    $.ajax({
+                        type: "DELETE",
+                        //tên API
+                        url: "/category/" + idCate,
+                        //xử lý khi thành công
+                        success: function (data) {
+                            a.parent().parent().remove();
+                        }
+                    });
+            }
+        </script>
+    </head>
+
+<body>
+<form id="addCate">
+    <input type="text" id="cateName">
+    <input type="submit" value="Create" onclick="addCate()">
+</form>
+<table id="customers">
+    <tr>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <th:block th:each="c: ${listCate}">
+        <tr>
+            <td th:text="${c.name}"></td>
+            <td><a class="editCate" th:href="${c.getId()}">Edit</a></td>
+            <td><a class="deleteCate" onclick="deleteCate($(this))" th:href="${c.id}">Delete</a></td>
+        </tr>
+    </th:block>
+
+</table>
+<footer th:replace="/layout :: footer"></footer>
+
+
+</body>
+</html>

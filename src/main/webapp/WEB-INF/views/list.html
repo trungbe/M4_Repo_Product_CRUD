@@ -20,17 +20,20 @@
     <input type="submit" value="Search">
 
 </form>
+<form action="/category/list">
+    <input style="background-color: red" type="submit" value="Show Category">
+</form>
 <form action="/products/create">
-    <input type="submit" value="Add new product">
+    <input style="background-color: blue" type="submit" value="Add new product">
 </form>
 <form action="/products/top5pricemax">
-    <input type="submit" value="Top 5 Price Max">
+    <input style="background-color: #00ffe1" type="submit" value="Top 5 Price Max">
 </form>
 <form action="/products/top5productnewest">
-    <input type="submit" value="Top 5 Product Newest">
+    <input style="background-color: brown" type="submit" value="Top 5 Product Newest">
 </form>
 <form action="/products/sumprice">
-    <input type="submit" value="Sum Price">
+    <input style="background-color: #c8ff00;color: #0d060e" type="submit" value="Sum Price">
 </form>
 <span style="color: red" th:if="${sumprice}" th:text="${sumprice}+'$'"></span>
 <table id="customers">
